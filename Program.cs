@@ -1,5 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-QRunner.Run<Day2.Q2>();
+﻿QRunner.Run<Day1.Q1>();
 
 
 
