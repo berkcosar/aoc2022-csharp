@@ -13,7 +13,7 @@ namespace Day4
                 string[] elf2Parts = elves[1].Split('-');
                 (int start,int end) elf1 =(Convert.ToInt32(elf1Parts[0]),Convert.ToInt32(elf1Parts[1]));
                 (int start,int end) elf2 =(Convert.ToInt32(elf2Parts[0]),Convert.ToInt32(elf2Parts[1]));
-                if(AreIntervalsOverLap(elf1,elf2))
+                if(DoIntervalsOverlap(elf1,elf2))
                 {
                     overlappingPairCount++;
                 }
@@ -21,7 +21,7 @@ namespace Day4
 
             return overlappingPairCount; 
         }
-        private bool AreIntervalsOverLap((int start,int end) first, (int start,int end) second)
+        private bool DoIntervalsOverlap((int start,int end) first, (int start,int end) second)
         {
             if(first.start >= second.start && first.start <= second.end)
             {
