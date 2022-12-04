@@ -23,19 +23,13 @@ namespace Day4
         }
         private bool DoIntervalsOverlap((int start,int end) first, (int start,int end) second)
         {
-            if(first.start >= second.start && first.start <= second.end)
+            if(first.start >= second.start && first.end <= second.end)
             {
-                if(first.end >= second.start && first.end <= second.end)
-                {
-                    return true;
-                }
+                return true;
             }
-            if(second.start >= first.start && second.start <= first.end)
+            else if(second.start >= first.start && second.end <= first.end)
             {
-                if(second.end >= first.start && second.end <= first.end)
-                {
-                    return true;
-                }
+                return true;
             }
             return false;
 
