@@ -9,8 +9,8 @@ namespace Day5
             string[] lines = ReadAllLines();
 
             int emptyLineIndex = GetEmptyLineIndex(lines);
-            int numOfCrates = ParseTotalCrateCount(lines[emptyLineIndex-1]);
-            Stack<char>[] stacks = CreateInitialStacks(lines,emptyLineIndex-2,numOfCrates);
+            int numOfStacks = ParseTotalStackCount(lines[emptyLineIndex-1]);
+            Stack<char>[] stacks = CreateInitialStacks(lines,emptyLineIndex-2,numOfStacks);
             StringBuilder sb = new();
 
             for(int i = emptyLineIndex+1; i< lines.Length;i++)
@@ -18,12 +18,12 @@ namespace Day5
                 var rearrangementCommand = ParseRearrangement(lines[i]);
                 for(int m =0;m< rearrangementCommand.numOfItemsToMove; m++)
                 {
-                    stacks[rearrangementCommand.targetCrateIndex].Push(stacks[rearrangementCommand.sourceCrateIndex].Pop());
+                    stacks[rearrangementCommand.targetStackIndex].Push(stacks[rearrangementCommand.sourceStackIndex].Pop());
                 }
 
             }
             
-            for(int i = 0; i < numOfCrates;i++)
+            for(int i = 0; i < numOfStacks;i++)
             {
                 sb.Append(stacks[i].Peek());
             }
@@ -43,7 +43,7 @@ namespace Day5
             }
             return -1;
         }
-        private int ParseTotalCrateCount(string crateCountLine)
+        private int ParseTotalStackCount(string crateCountLine)
         {
             string[] crateNumberLineParts = crateCountLine.Split(' ');
             for(int i = crateNumberLineParts.Length-1; i> 0;i--)
@@ -75,7 +75,7 @@ namespace Day5
             return returnVal;
         }
 
-        private (int numOfItemsToMove, int sourceCrateIndex, int targetCrateIndex) ParseRearrangement(string line)
+        private (int numOfItemsToMove, int sourceStackIndex, int targetStackIndex) ParseRearrangement(string line)
         {
             string[] parts = line.Split(' ');
             return (Convert.ToInt32(parts[1]),Convert.ToInt32(parts[3])-1,Convert.ToInt32(parts[5])-1);
