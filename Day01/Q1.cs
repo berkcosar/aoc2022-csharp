@@ -1,6 +1,6 @@
-namespace Day1
+namespace Day01
 {
-    public class Q2:BaseQuestion
+    public class Q1:BaseQuestion
     {
         public override object Run()
         {
@@ -27,7 +27,7 @@ namespace Day1
                 cals.Add(currentSum);
             }
             cals.Sort();
-            return cals[cals.Count-1] + cals[cals.Count-2] + cals[cals.Count-3];
+            return cals[cals.Count-1];
         }
     }
 }
