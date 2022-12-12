@@ -1,5 +1,5 @@
 
-namespace Day5
+namespace Day05
 {
     using System.Text;
     public class Q1:BaseQuestion

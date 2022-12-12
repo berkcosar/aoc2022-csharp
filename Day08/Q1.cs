@@ -1,5 +1,5 @@
 
-namespace Day8
+namespace Day08
 {
     using Microsoft.Toolkit.HighPerformance;
     using Microsoft.Toolkit.HighPerformance.Enumerables;

@@ -1,68 +1,13 @@
 
-namespace Day7
+namespace Day07
 {
-    public class File
-    {
-        public File(string name, int size)
-        {
-            Name = name;
-            _Size = size;
-        }
-
-        public string Name { get; set; }
-
-        protected int _Size;
-        public virtual int Size { get => _Size; }
-    }
-
-    public class Directory : File
-    {
-
-        public static List<Directory> Directories = new();
-        public Directory(string name, Directory? parent) : base(name, 0)
-        {
-            Parent = parent;
-            Childs = new();
-            Directories.Add(this);
-        }
-
-        private bool _SizeCalculated = false;
-        public Directory? Parent { get; set; }
-
-        public Dictionary<string, File> Childs { get; set; }
-
-        public override int Size
-        {
-            get
-            {
-                if (!_SizeCalculated)
-                {
-                    foreach (var child in Childs)
-                    {
-                        _Size += child.Value.Size;
-                    }
-                    _SizeCalculated = true;
-                }
-                return _Size;
-            }
-        }
-
-        public void AddChild(File f)
-        {
-            if (!Childs.ContainsKey(f.Name))
-            {
-                _SizeCalculated = false;
-                Childs.Add(f.Name, f);
-            }
-        }
-    }
-
-    public class Q1 : BaseQuestion
+    public class Q2 : BaseQuestion
     {
         public override object Run()
         {
             string[] commands = ReadAllLines();
-            long returnVal = 0;
+            int totalDiskSpace = 70000000;
+            int minDiskSpaceRequiredForUpdate = 30000000;
             Directory baseDirectory = new("//", null);
             Directory? currentDirectory = baseDirectory;
 
@@ -101,18 +46,17 @@ namespace Day7
                 }
             }
 
+            int minSizeToDelete =minDiskSpaceRequiredForUpdate - (totalDiskSpace - Directory.Directories[0].Size);
+            int minDirSizeToDelete = Int32.MaxValue;
             for (int i = 0; i < Directory.Directories.Count; i++)
             {
-                if (Directory.Directories[i].Size < 100000)
+                if (Directory.Directories[i].Size >= minSizeToDelete)
                 {
-                    returnVal += Directory.Directories[i].Size;
+                    minDirSizeToDelete = Math.Min(minDirSizeToDelete,Directory.Directories[i].Size);
                 }
             }
 
-            return returnVal;
+            return minDirSizeToDelete;
         }
-
-
-
     }
 }

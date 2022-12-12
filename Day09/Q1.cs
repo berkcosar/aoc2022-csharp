@@ -1,5 +1,5 @@
 
-namespace Day9
+namespace Day09
 {
     public class Q1 : BaseQuestion
     {

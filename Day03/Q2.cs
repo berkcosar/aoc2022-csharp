@@ -1,4 +1,4 @@
-namespace Day3
+namespace Day03
 {
     public class Q2:BaseQuestion
     {
